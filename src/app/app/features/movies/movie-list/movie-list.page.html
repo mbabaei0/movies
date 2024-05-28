@@ -1,0 +1,13 @@
+<!-- @if (movies$ | async; as users) {
+  yes
+} -->
+
+<app-search (searchChanged)="onSearchChanged($event)" />
+<mat-form-field>
+  <mat-label>Search type</mat-label>
+  <mat-select (selectionChange)="onTypeChanged($event)">
+    @for (type of movieTypes; track type) {
+      <mat-option [value]="type">{{type}}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>

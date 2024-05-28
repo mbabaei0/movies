@@ -9,6 +9,14 @@
   </mat-select>
 </mat-form-field>
 
+<strong> {{searchParam().page}} / {{ totalPages()}} </strong>
+
+@if (searchParam().page < totalPages()){
+  <button (click)="onNext()" mat-button>Next Page</button>
+}
+@if (searchParam().page > 1){
+  <button (click)="onPrev()" mat-button>Prev Page</button>
+}
 
 <ul>
   @if (errMessage()) {
@@ -18,8 +26,26 @@
   @for (movieMap of ( movies() | keyvalue) ; track $index) {
     <li>
       <strong> {{movieMap.key}} </strong>
+      <mat-divider></mat-divider>
       @for (movie of movieMap.value ; track $index) {
-        <div [routerLink]="[movie.imdbID]" > {{movie.Title}} </div>
+        <div  >  </div>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{movie.Title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.Type}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image width="300" height="437" [ngSrc]="movie.Poster" [alt]="movie.Title">
+          <mat-card-content>
+            <p>
+               Made in {{movie.Year}}
+            </p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <mat-card-actions>
+            <button [routerLink]="[movie.imdbID]" mat-button>See Details</button>
+            <a mat-button [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">See Imdb</a>
+          </mat-card-actions>
+        </mat-card>
       }
     </li>
   } @empty {

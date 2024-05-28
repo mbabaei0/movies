@@ -8,7 +8,10 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { GroupByService } from '@core/services/group-by.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { NgOptimizedImage } from '@angular/common'
 @Component({
   selector: 'app-movie-list',
   standalone: true,
@@ -17,7 +20,11 @@ import { RouterLink } from '@angular/router';
      SearchComponent,
      MatSelectModule,
      FormsModule,
-     RouterLink
+     RouterLink,
+     MatCardModule,
+     MatButton,
+     MatDividerModule,
+     NgOptimizedImage
     ],
   templateUrl: './movie-list.page.html',
   styleUrl: './movie-list.page.scss',
@@ -33,30 +40,44 @@ export class MovieListPage {
 
   movies = signal<Map<string,MovieSummary[]> | null | undefined>(undefined);
   errMessage = signal<string | null>(null);
+  totalPages = signal<number>(0);
 
-  constructor(){
-    effect(() => {
-      this.onSearch(this.searchParam())
-    });
-  }
+  constructor(){}
 
   onSearch(params: MovieSearchParams){
+    if(!params.term) {
+      this.errMessage.set(null);
+      this.movies.set(null);
+      return
+    }
+
     this.#movieFacade.getMovies(params).subscribe(async (res)=>{
       if(res.Error) {
         this.errMessage.set(res.Error);
-        this.movies.set(undefined)
+        this.movies.set(undefined);
       }
       else if(res.Search) {
         const grouped = await this.#groupByService.groupBy(res.Search , 'Year')
-        this.movies.set(grouped)
-        this.errMessage.set(null)
+        this.movies.set(grouped);
+        this.errMessage.set(null);
+        this.totalPages.set( Math.ceil(+res.totalResults! / 10))
       }
     });
   }
   onSearchChanged(term:string){
-    this.searchParam.update( params => ({...params,  term}))
+    this.searchParam.update( params => ({...params,  term , page: 1}))
+    this.onSearch(this.searchParam())
   }
   onTypeChanged(event: MatSelectChange){
-    this.searchParam.update( params => ({...params,  type: event.value}))
+    this.searchParam.update( params => ({...params,  type: event.value , page: 1}));
+    this.onSearch(this.searchParam())
+  }
+  onNext(){
+    this.searchParam.update(param => ({...param , page: param.page + 1}));
+    this.onSearch(this.searchParam())
+  }
+  onPrev(){
+    this.searchParam.update(param => ({...param , page: param.page - 1}));
+    this.onSearch(this.searchParam())
   }
 }

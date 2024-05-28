@@ -16,7 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SearchComponent implements OnInit {
   destroyRef = inject(DestroyRef);
 
-  debounce = input<number>(300);
+  debounce = input<number>(600);
   searchChanged = output<string>();
   searchInput$ = new Subject<string>();
 

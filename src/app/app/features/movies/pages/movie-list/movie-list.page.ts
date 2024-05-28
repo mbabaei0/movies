@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
-import { MovieFacadeService } from '../services/movie-facade.service';
+import { MovieFacadeService } from '../../services/movie-facade.service';
 
-import { Movie, MovieSearchParams } from '../models/movies.model';
+import { Movie, MovieSearchParams, MovieSummary } from '../../models/movies.model';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '@shared/components/search/search.component';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { GroupByService } from '@core/services/group-by.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
      CommonModule,
      SearchComponent,
      MatSelectModule,
-     FormsModule
+     FormsModule,
+     RouterLink
     ],
   templateUrl: './movie-list.page.html',
   styleUrl: './movie-list.page.scss',
@@ -26,10 +28,10 @@ export class MovieListPage {
   #groupByService = inject(GroupByService);
 
   searchParam = signal<MovieSearchParams>({page:1, term:'', type:'movie'});
-  movieTypes: MovieSearchParams['type'][] = ['movie','episode' , 'series'];
+  movieTypes: MovieSearchParams['type'][] = ['movie', 'series', 'episode'];
 
 
-  movies = signal<Map<string,Movie[]> | null | undefined>(undefined);
+  movies = signal<Map<string,MovieSummary[]> | null | undefined>(undefined);
   errMessage = signal<string | null>(null);
 
   constructor(){
@@ -46,7 +48,6 @@ export class MovieListPage {
       }
       else if(res.Search) {
         const grouped = await this.#groupByService.groupBy(res.Search , 'Year')
-        console.log(grouped)
         this.movies.set(grouped)
         this.errMessage.set(null)
       }

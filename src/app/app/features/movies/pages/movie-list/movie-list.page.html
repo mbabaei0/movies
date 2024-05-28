@@ -19,7 +19,7 @@
     <li>
       <strong> {{movieMap.key}} </strong>
       @for (movie of movieMap.value ; track $index) {
-        <div> {{movie.Title}} </div>
+        <div [routerLink]="[movie.imdbID]" > {{movie.Title}} </div>
       }
     </li>
   } @empty {

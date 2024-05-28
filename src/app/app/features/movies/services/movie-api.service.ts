@@ -12,4 +12,8 @@ export class MovieApiService {
   fetchMovies(params: MovieSearchParams){
     return this.#http.get<ApiResponse<Movie[]>>('', {params: {...params, s: params.term}})
   }
+
+  fetchMovie(id:string){
+    return this.#http.get<Movie>('', {params: {i:id}})
+  }
 }

@@ -11,4 +11,7 @@ export class MovieFacadeService {
   getMovies(params: MovieSearchParams){
     return this.#movieApiService.fetchMovies(params);
   }
+  getMovie(id: string){
+    return this.#movieApiService.fetchMovie(id);
+  }
 }

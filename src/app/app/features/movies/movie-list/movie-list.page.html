@@ -1,13 +1,28 @@
-<!-- @if (movies$ | async; as users) {
-  yes
-} -->
 
 <app-search (searchChanged)="onSearchChanged($event)" />
 <mat-form-field>
   <mat-label>Search type</mat-label>
-  <mat-select (selectionChange)="onTypeChanged($event)">
+  <mat-select [ngModel]="searchParam().type" (selectionChange)="onTypeChanged($event)">
     @for (type of movieTypes; track type) {
       <mat-option [value]="type">{{type}}</mat-option>
     }
   </mat-select>
 </mat-form-field>
+
+
+<ul>
+  @if (errMessage()) {
+    <div>{{errMessage()}}</div>
+  }
+
+  @for (movieMap of ( movies() | keyvalue) ; track $index) {
+    <li>
+      <strong> {{movieMap.key}} </strong>
+      @for (movie of movieMap.value ; track $index) {
+        <div> {{movie.Title}} </div>
+      }
+    </li>
+  } @empty {
+    No movies found
+  }
+</ul>

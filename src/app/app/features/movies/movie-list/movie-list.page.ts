@@ -5,6 +5,8 @@ import { Movie, MovieSearchParams } from '../models/movies.model';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '@shared/components/search/search.component';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { GroupByService } from '@core/services/group-by.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-list',
@@ -12,7 +14,8 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
   imports: [
      CommonModule,
      SearchComponent,
-     MatSelectModule
+     MatSelectModule,
+     FormsModule
     ],
   templateUrl: './movie-list.page.html',
   styleUrl: './movie-list.page.scss',
@@ -20,9 +23,14 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 })
 export class MovieListPage {
   #movieFacade = inject(MovieFacadeService);
+  #groupByService = inject(GroupByService);
 
-  searchParam = signal<MovieSearchParams>({page:1, term:'', type:'movie'})
-  movieTypes: MovieSearchParams['type'][] = ['movie','episode' , 'series']
+  searchParam = signal<MovieSearchParams>({page:1, term:'', type:'movie'});
+  movieTypes: MovieSearchParams['type'][] = ['movie','episode' , 'series'];
+
+
+  movies = signal<Map<string,Movie[]> | null | undefined>(undefined);
+  errMessage = signal<string | null>(null);
 
   constructor(){
     effect(() => {
@@ -31,7 +39,18 @@ export class MovieListPage {
   }
 
   onSearch(params: MovieSearchParams){
-    this.#movieFacade.getMovies(params).subscribe();
+    this.#movieFacade.getMovies(params).subscribe(async (res)=>{
+      if(res.Error) {
+        this.errMessage.set(res.Error);
+        this.movies.set(undefined)
+      }
+      else if(res.Search) {
+        const grouped = await this.#groupByService.groupBy(res.Search , 'Year')
+        console.log(grouped)
+        this.movies.set(grouped)
+        this.errMessage.set(null)
+      }
+    });
   }
   onSearchChanged(term:string){
     this.searchParam.update( params => ({...params,  term}))

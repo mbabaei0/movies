@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
 import { MovieFacadeService } from '../../services/movie-facade.service';
 
 import { Movie, MovieSearchParams, MovieSummary } from '../../models/movies.model';
@@ -11,6 +11,7 @@ import { MatButton } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-movie-list',
   standalone: true,
@@ -29,6 +30,7 @@ import { MovieCardComponent } from '../../components/movie-card/movie-card.compo
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieListPage {
+  destroyRef = inject(DestroyRef);
   movieFacade = inject(MovieFacadeService);
 
   searchParam = signal<MovieSearchParams>({page:1, term:'', type:'movie'});
@@ -40,7 +42,11 @@ export class MovieListPage {
       this.movieFacade.resetStore();
       return
     }
-    this.movieFacade.fetachMovies(params).subscribe();
+    this.movieFacade.fetachMovies(params)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe();
   }
   onSearchChanged(term:string){
     this.searchParam.update( params => ({...params,  term , page: 1}))

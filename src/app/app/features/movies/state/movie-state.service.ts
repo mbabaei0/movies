@@ -19,14 +19,6 @@ export class MovieStateService {
   public readonly $totalPages = this.#state.$totalPages.asReadonly();
   public readonly $loading = this.#state.$loading.asReadonly();
 
-  // public readonly paginated = createEffect<PageEvent>(_ => _.pipe(
-  //   debounceTime(200),
-  //   tap((event) => {
-  //     this.state.$page.set(event.pageIndex);
-  //     this.state.$pageSize.set(event.pageSize);
-  //   })
-  // ));
-
   setMovies(movies: Map<string,MovieSummary[]> | null) {
     this.#state.$movies.set(movies);
   }

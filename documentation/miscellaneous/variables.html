@@ -149,7 +149,7 @@
                         <i>Default value : </i><code>{
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withViewTransitions()),
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptors([apiKeyInterceptor]),
@@ -186,7 +186,7 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
   API_KEY: &#x27;8ea39b15&#x27;,
-  API_URL: &#x27;http://img.omdbapi.com/&#x27;
+  API_URL: &#x27;https://www.omdbapi.com&#x27;
 }</code>
                     </td>
                 </tr>
@@ -218,7 +218,7 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
   API_KEY: &#x27;8ea39b15&#x27;,
-  API_URL: &#x27;http://img.omdbapi.com/&#x27;
+  API_URL: &#x27;https://www.omdbapi.com&#x27;
 }</code>
                     </td>
                 </tr>

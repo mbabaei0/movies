@@ -77,7 +77,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-functions">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -87,70 +87,119 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Miscellaneous</li>
-  <li class="breadcrumb-item">Functions</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >MovieApiService</li>
 </ol>
 
-<section data-compodoc="block-index">
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/app/features/movies/services/movie-api.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#apiKeyInterceptor" title="src/app/core/interceptors/api.interceptor.ts" ><b>apiKeyInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../api.interceptor.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#groupBy" title="src/app/core/workers/group-by-worker.worker.ts" ><b>groupBy</b>&nbsp;&nbsp;&nbsp;(src/.../group-by-worker.worker.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#randomId" title="src/app/core/utils/utils.ts" ><b>randomId</b>&nbsp;&nbsp;&nbsp;(src/.../utils.ts)</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="##http" >#http</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#fetchMovie" >fetchMovie</a>
+                            </li>
+                            <li>
+                                <a href="#fetchMovies" >fetchMovies</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
         </tbody>
     </table>
 </section>
 
-    <h3>src/app/core/interceptors/api.interceptor.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="apiKeyInterceptor"></a>
+                    <a name="fetchMovie"></a>
                     <span class="name">
-                        <span ><b>apiKeyInterceptor</b></span>
-                        <a href="#apiKeyInterceptor"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>fetchMovie</b></span>
+                        <a href="#fetchMovie"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>apiKeyInterceptor(req: HttpRequest, next: HttpHandlerFn)</code>
+<code>fetchMovie(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/app/app/features/movies/services/movie-api.service.ts:16</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Intercepts an HTTP request to add an API key and modify the request URL.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -161,14 +210,13 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>req</td>
+                                                <td>id</td>
                                             <td>
-                                                        <code>HttpRequest</code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -176,76 +224,49 @@
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The outgoing HTTP request.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>next</td>
-                                            <td>
-                                                        <code>HttpHandlerFn</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The next interceptor or backend handler in the chain.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;&gt;&gt;</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                <ul>
-<li>An observable of the HTTP event.</li>
-</ul>
-<p>This interceptor appends the API key as a query parameter to the request and modifies the request URL
-to include the base API URL from the environment configuration.</p>
-
+                                
                             </div>
                 </td>
             </tr>
         </tbody>
     </table>
-</section>    <h3>src/app/core/workers/group-by-worker.worker.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="groupBy"></a>
+                    <a name="fetchMovies"></a>
                     <span class="name">
-                        <span ><b>groupBy</b></span>
-                        <a href="#groupBy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>fetchMovies</b></span>
+                        <a href="#fetchMovies"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>groupBy(list: Array, keyGetter)</code>
+<code>fetchMovies(params: <a href="../interfaces/MovieSearchParams.html" target="_self">MovieSearchParams</a>)</code>
                 </td>
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="12"
+                                    class="link-to-prism">src/app/app/features/movies/services/movie-api.service.ts:12</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Groups a list of items by a specified key.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -256,14 +277,13 @@ to include the base API URL from the environment configuration.</p>
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>list</td>
+                                                <td>params</td>
                                             <td>
-                                                        <code>Array</code>
+                                                            <code><a href="../interfaces/MovieSearchParams.html" target="_self" >MovieSearchParams</a></code>
                                             </td>
 
                                             <td>
@@ -271,71 +291,93 @@ to include the base API URL from the environment configuration.</p>
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>The list of items to be grouped.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                                <td>keyGetter</td>
-                                            <td>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>A function that returns the key to group by for each item.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
                             </div>
                 </td>
             </tr>
         </tbody>
     </table>
-</section>    <h3>src/app/core/utils/utils.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="randomId"></a>
+                    <a name="#http"></a>
                     <span class="name">
-                        <span ><b>randomId</b></span>
-                        <a href="#randomId"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>#http</b></span>
+                        <a href="##http"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-4">
-<code>randomId()</code>
-                </td>
-            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(HttpClient)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/app/features/movies/services/movie-api.service.ts:10</a></div>
+                        </td>
+                    </tr>
 
 
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </div>
-                </td>
-            </tr>
         </tbody>
     </table>
 </section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Movie, MovieSearchParams } from &#x27;../models/movies.model&#x27;;
+import { ApiResponse } from &#x27;@core/models/api-reponse.model&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class MovieApiService {
+  #http &#x3D; inject(HttpClient);
+
+  fetchMovies(params: MovieSearchParams){
+    return this.#http.get&lt;ApiResponse&lt;Movie[]&gt;&gt;(&#x27;&#x27;, {params: {...params, s: params.term}})
+  }
+
+  fetchMovie(id:string){
+    return this.#http.get&lt;Movie&gt;(&#x27;&#x27;, {params: {i:id}})
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
                    </div><div class="search-results">
@@ -363,8 +405,8 @@ to include the base API URL from the environment configuration.</p>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-functions';
-            var COMPODOC_CURRENT_PAGE_URL = 'functions.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'MovieApiService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

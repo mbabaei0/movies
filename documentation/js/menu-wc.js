@@ -56,6 +56,59 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="components/AppComponent.html" data-type="entity-link" >AppComponent</a>
                             </li>
+                            <li class="link">
+                                <a href="components/MovieCardComponent.html" data-type="entity-link" >MovieCardComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MovieDetailPage.html" data-type="entity-link" >MovieDetailPage</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MovieListPage.html" data-type="entity-link" >MovieListPage</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/SearchComponent.html" data-type="entity-link" >SearchComponent</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#injectables-links"' :
+                                'data-bs-target="#xs-injectables-links"' }>
+                                <span class="icon ion-md-arrow-round-down"></span>
+                                <span>Injectables</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
+                                <li class="link">
+                                    <a href="injectables/GroupByService.html" data-type="entity-link" >GroupByService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MovieApiService.html" data-type="entity-link" >MovieApiService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MovieFacadeService.html" data-type="entity-link" >MovieFacadeService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MovieStateService.html" data-type="entity-link" >MovieStateService</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#interfaces-links"' :
+                            'data-bs-target="#xs-interfaces-links"' }>
+                            <span class="icon ion-md-information-circle-outline"></span>
+                            <span>Interfaces</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/ApiResponse.html" data-type="entity-link" >ApiResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Movie.html" data-type="entity-link" >Movie</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MovieSearchParams.html" data-type="entity-link" >MovieSearchParams</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="chapter">
@@ -68,6 +121,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
                             <li class="link">
                                 <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
                             </li>
                             <li class="link">
                                 <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>

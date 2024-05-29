@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ci": "ng build --base-href /movies/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "compodoc:build": "compodoc -p tsconfig.doc.json",

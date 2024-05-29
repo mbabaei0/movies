@@ -1,0 +1,39 @@
+
+<div class="searchbar">
+  <app-search (searchChanged)="onSearchChanged($event)" />
+  <mat-form-field>
+    <mat-label>Search type</mat-label>
+    <mat-select [ngModel]="searchParam().type" (selectionChange)="onTypeChanged($event)">
+      @for (type of movieTypes; track type) {
+        <mat-option [value]="type">{{type}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
+@if (movieFacade.$totalPages()){
+  <div class="paginationBar">
+    <strong> {{searchParam().page}} / {{ movieFacade.$totalPages()}} </strong>
+      <button [disabled]="searchParam().page <= 1" (click)="onPrev()" mat-button>Prev Page</button>
+      <button [disabled]="searchParam().page >= movieFacade.$totalPages()" (click)="onNext()" mat-button>Next Page</button>
+  </div>
+}
+
+@if (movieFacade.$err()) {
+  <div class="errBox">{{movieFacade.$err()}}</div>
+}
+<div class="moviesWrapper">
+  @for (movieMap of ( movieFacade.$movies() | keyvalue) ; track $index) {
+    <div class="movieGroup">
+      <mat-chip-option selected color="primary"> <strong>{{movieMap.key}}</strong></mat-chip-option>
+      <mat-divider></mat-divider>
+      <div class="movieGroup__items">
+        @for (movie of movieMap.value ; track $index) {
+          <app-movie-card [movie]="movie" />
+        }
+      </div>
+    </div>
+  } @empty {
+    <div class="emptyBox">No item found ...</div>
+  }
+</div>

@@ -1,0 +1,5 @@
+<mat-form-field >
+  <mat-label>Search</mat-label>
+  <input matInput placeholder="Movie name" (input)="onSearchInputChange($any($event.target).value)">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>

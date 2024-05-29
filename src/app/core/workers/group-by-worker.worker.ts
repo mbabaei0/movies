@@ -2,7 +2,6 @@
 
 addEventListener('message', ({ data }) => {
   const response = groupBy<unknown>(data.items, (feature) => feature[data.key]);;
-
   postMessage({id: data.id , response});
 });
 

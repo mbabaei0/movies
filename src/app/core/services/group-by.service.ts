@@ -15,7 +15,7 @@ export class GroupByService {
   constructor() {
     this.worker  = new Worker(new URL('../workers/group-by-worker.worker', import.meta.url));
   }
-  groupBy<T>(items: Array<T>, key: string): Promise<any> {
+  groupBy<T>(items: Array<T>, key: string): Promise<Map<string,T[]>> {
     return new Promise((resolve, _) => {
       this.worker.postMessage({items , key , id: randomId()});
       this.worker.onmessage = (event) => {

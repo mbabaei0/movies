@@ -1,8 +1,46 @@
-.example-card {
-  max-width: 300px
+.searchbar{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem;
+  justify-content: center;
+  gap: 1rem;
 }
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.errBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-weight: bold;
+  color: red;
+  background: rgba(255, 0, 0, 0.144);
+  border-radius: 5px;
+  margin: 1rem;
+}
+.emptyBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-weight: bold;
+  color: rgb(0, 174, 255);
+  background: rgba(0, 183, 255, 0.096);
+  border-radius: 5px;
+  margin: 1rem;
+}
+.paginationBar{
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  justify-content: center;
+  gap: 1rem;
+}
+.movieGroup{
+  padding: 2rem;
+  &__items{
+    padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }

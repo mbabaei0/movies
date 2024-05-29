@@ -1,54 +1,39 @@
 
-<app-search (searchChanged)="onSearchChanged($event)" />
-<mat-form-field>
-  <mat-label>Search type</mat-label>
-  <mat-select [ngModel]="searchParam().type" (selectionChange)="onTypeChanged($event)">
-    @for (type of movieTypes; track type) {
-      <mat-option [value]="type">{{type}}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-
-<strong> {{searchParam().page}} / {{ totalPages()}} </strong>
-
-@if (searchParam().page < totalPages()){
-  <button (click)="onNext()" mat-button>Next Page</button>
-}
-@if (searchParam().page > 1){
-  <button (click)="onPrev()" mat-button>Prev Page</button>
-}
-
-<ul>
-  @if (errMessage()) {
-    <div>{{errMessage()}}</div>
-  }
-
-  @for (movieMap of ( movies() | keyvalue) ; track $index) {
-    <li>
-      <strong> {{movieMap.key}} </strong>
-      <mat-divider></mat-divider>
-      @for (movie of movieMap.value ; track $index) {
-        <div  >  </div>
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title>{{movie.Title}}</mat-card-title>
-            <mat-card-subtitle>{{movie.Type}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image width="300" height="437" [ngSrc]="movie.Poster" [alt]="movie.Title">
-          <mat-card-content>
-            <p>
-               Made in {{movie.Year}}
-            </p>
-            <mat-divider></mat-divider>
-          </mat-card-content>
-          <mat-card-actions>
-            <button [routerLink]="[movie.imdbID]" mat-button>See Details</button>
-            <a mat-button [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">See Imdb</a>
-          </mat-card-actions>
-        </mat-card>
+<div class="searchbar">
+  <app-search (searchChanged)="onSearchChanged($event)" />
+  <mat-form-field>
+    <mat-label>Search type</mat-label>
+    <mat-select [ngModel]="searchParam().type" (selectionChange)="onTypeChanged($event)">
+      @for (type of movieTypes; track type) {
+        <mat-option [value]="type">{{type}}</mat-option>
       }
-    </li>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+@if (movieFacade.$totalPages()){
+  <div class="paginationBar">
+    <strong> {{searchParam().page}} / {{ movieFacade.$totalPages()}} </strong>
+      <button [disabled]="searchParam().page <= 1" (click)="onPrev()" mat-button>Prev Page</button>
+      <button [disabled]="searchParam().page >= movieFacade.$totalPages()" (click)="onNext()" mat-button>Next Page</button>
+  </div>
+}
+
+@if (movieFacade.$err()) {
+  <div class="errBox">{{movieFacade.$err()}}</div>
+}
+<div class="moviesWrapper">
+  @for (movieMap of ( movieFacade.$movies() | keyvalue) ; track $index) {
+    <div class="movieGroup">
+      <mat-chip-option selected color="primary"> <strong>{{movieMap.key}}</strong></mat-chip-option>
+      <mat-divider></mat-divider>
+      <div class="movieGroup__items">
+        @for (movie of movieMap.value ; track $index) {
+          <app-movie-card [movie]="movie" />
+        }
+      </div>
+    </div>
   } @empty {
-    No movies found
+    <div class="emptyBox">No item found ...</div>
   }
-</ul>
+</div>

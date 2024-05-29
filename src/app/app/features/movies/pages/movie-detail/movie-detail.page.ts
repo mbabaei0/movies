@@ -2,11 +2,20 @@ import { Component, OnInit, inject, ChangeDetectionStrategy, signal} from '@angu
 import { MovieFacadeService } from '../../services/movie-facade.service';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../../models/movies.model';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDivider } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-movie-detail',
   standalone: true,
-  imports: [],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatDivider,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './movie-detail.page.html',
   styleUrl: './movie-detail.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

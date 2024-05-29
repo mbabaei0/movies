@@ -5,6 +5,7 @@ import { Movie } from '../../models/movies.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-movie-detail',
@@ -12,7 +13,8 @@ import { MatDivider } from '@angular/material/divider';
   imports: [
     MatCardModule,
     MatButtonModule,
-    MatDivider
+    MatDivider,
+    MatProgressSpinnerModule
   ],
   templateUrl: './movie-detail.page.html',
   styleUrl: './movie-detail.page.scss',

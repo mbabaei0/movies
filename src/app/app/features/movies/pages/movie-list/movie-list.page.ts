@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, effect, inject, signal } from '@angular/core';
 import { MovieFacadeService } from '../../services/movie-facade.service';
 
 import { Movie, MovieSearchParams, MovieSummary } from '../../models/movies.model';
@@ -29,14 +29,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './movie-list.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieListPage {
+export class MovieListPage implements OnInit {
   destroyRef = inject(DestroyRef);
   movieFacade = inject(MovieFacadeService);
 
   searchParam = signal<MovieSearchParams>({page:1, term:'', type:'movie'});
   movieTypes: MovieSearchParams['type'][] = ['movie', 'series', 'episode'];
 
-
+  ngOnInit(): void {
+      this.movieFacade.resetStore();
+  }
   onSearch(params: MovieSearchParams){
     if(!params.term) {
       this.movieFacade.resetStore();

@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { MovieApiService } from './movie-api.service';
 import { MovieSearchParams } from '../models/movies.model';
 import { MovieStateService } from '../state/movie-state.service';
-import { debounceTime, tap } from 'rxjs';
+import { debounceTime, finalize, tap } from 'rxjs';
 import { GroupByService } from '@core/services/group-by.service';
 
 @Injectable({
@@ -32,7 +32,6 @@ export class MovieFacadeService {
     return this.#movieApiService.fetchMovies(params).pipe(
       debounceTime(200),
       tap(async(res) => {
-        this.#movieStateService.setSetLoading(false);
         if(res.Error) {
           this.#movieStateService.setErr(res.Error);
           this.#movieStateService.setMovies(null);
@@ -44,6 +43,9 @@ export class MovieFacadeService {
           this.#movieStateService.setErr('');
           this.#movieStateService.setTotalPages( Math.ceil(+res.totalResults! / 10))
         }
+      }),
+      finalize(() => {
+        this.#movieStateService.setSetLoading(false);
       })
     );
   }

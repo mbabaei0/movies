@@ -1,0 +1,1 @@
+addEventListener("message",({data:e})=>{let n=c(e.items,s=>s[e.key]);postMessage({id:e.id,response:n})});function c(e,n){let s=new Map;return e.forEach(o=>{let t=n(o),r=s.get(t);r?r.push(o):s.set(t,[o])}),s}export{c as groupBy};

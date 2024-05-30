@@ -1,9 +1,10 @@
 
 
-@if (movieFacade.$loading()) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
+
 <div class="header">
+  @if (movieFacade.$loading()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
   <div class="searchbar">
     <app-search class="search"(searchChanged)="onSearchChanged($event)" />
     <mat-form-field class="filter">
@@ -30,21 +31,23 @@
 }
 
 <div class="moviesWrapper">
-  @for (movieMap of ( movieFacade.$movies() | keyvalue) ; track $index) {
-    <div class="movieGroup">
-      <div class="groupDivider">
-        <mat-icon>event</mat-icon>
-        <strong>{{movieMap.key}}</strong>
-        <mat-divider></mat-divider>
-      </div>
+    @for (movieMap of ( movieFacade.$movies() | keyvalue) ; track $index) {
+      <div class="movieGroup">
+        <div class="groupDivider">
+          <mat-icon>event</mat-icon>
+          <strong>{{movieMap.key}}</strong>
+          <mat-divider></mat-divider>
+        </div>
 
-      <div class="movieGroup__items">
-        @for (movie of movieMap.value ; track $index) {
-          <app-movie-card [movie]="movie" />
-        }
+        <div class="movieGroup__items">
+          @for (movie of movieMap.value ; track $index) {
+            <app-movie-card [movie]="movie" />
+          }
+        </div>
       </div>
-    </div>
-  } @empty {
-    <div class="emptyBox">Search movies ...</div>
-  }
+    } @empty {
+      <div class="emptyBox">Search movies ...</div>
+    }
 </div>
+
+

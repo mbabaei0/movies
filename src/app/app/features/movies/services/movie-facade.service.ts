@@ -23,13 +23,20 @@ export class MovieFacadeService {
     return this.#movieStateService.$totalPages;
   }
 
+  get $loading(){
+    return this.#movieStateService.$loading;
+  }
+
   fetachMovies(params: MovieSearchParams){
+    this.#movieStateService.setSetLoading(true);
     return this.#movieApiService.fetchMovies(params).pipe(
       debounceTime(200),
       tap(async(res) => {
+        this.#movieStateService.setSetLoading(false);
         if(res.Error) {
           this.#movieStateService.setErr(res.Error);
           this.#movieStateService.setMovies(null);
+          this.#movieStateService.setTotalPages(0)
         }
         else if(res.Search) {
           const grouped = await this.#groupByService.groupBy(res.Search , 'Year');

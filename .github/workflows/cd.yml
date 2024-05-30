@@ -1,19 +1,24 @@
 name: build movie app
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  cd:
-    runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
         node: [18]
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: Setup node env
         uses: actions/setup-node@v2.1.2
@@ -27,33 +32,30 @@ jobs:
         run: npm run build:ci
 
       - name: Deploy
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.gh_pages }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/movie-app/browser
 
-# on: [pull_request]
+  test:
+    runs-on: ubuntu-latest
 
-# jobs:
-#   cd:
-#     runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: [18]
 
-#     strategy:
-#       matrix:
-#         os: [ubuntu-latest]
-#         node: [18]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@master
+      - name: Setup node env
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node }}
 
-#       - name: Setup node env
-#         uses: actions/setup-node@v2.1.2
-#         with:
-#           node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: npm install
 
-#       - name: Install dependencies
-#         run: npm install
-
-#       - name: Test
-#         run: npm run test
+      - name: Test
+        run: npm run test

@@ -1,20 +1,18 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <mat-card-title>{{movie.Title}}</mat-card-title>
-    <mat-card-subtitle>{{movie.Type}}</mat-card-subtitle>
+    <mat-card-title data-testingId="title">{{movie.Title}}</mat-card-title>
+    <mat-card-subtitle data-testingId="subtitle">{{movie.Type}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image width="300" height="437" [ngSrc]="movie.Poster" [alt]="movie.Title">
+  <img mat-card-image width="300" height="437" [ngSrc]="movie.Poster" [alt]="movie.Title" data-testingId="poster">
   <mat-card-content>
-    <p>
+    <p data-testingId="content">
        Made in {{movie.Year}}
     </p>
     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-actions>
-    <button [routerLink]="[movie.imdbID]" mat-button>See Details</button>
-    <button mat-button color="accent">
-      <a  [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">See Imdb</a>
-    </button>
+    <button [routerLink]="[movie.imdbID]" mat-button data-testingId="detail-btn">See Details</button>
+    <a data-testingId="linkimdb" [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">See Imdb</a>
 
   </mat-card-actions>
 </mat-card>

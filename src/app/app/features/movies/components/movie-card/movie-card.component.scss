@@ -3,7 +3,11 @@
 }
 
 .example-card {
-  max-width: 300px
+  max-width: 300px;
+  a{
+    text-decoration: none;
+    color: currentColor;
+  }
 }
 
 .example-header-image {

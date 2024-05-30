@@ -5,13 +5,13 @@ import { Movie, MovieSearchParams, MovieSummary } from '../../models/movies.mode
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from '@shared/components/search/search.component';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { GroupByService } from '@core/services/group-by.service';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatChipsModule } from '@angular/material/chips';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @Component({
   selector: 'app-movie-list',
   standalone: true,
@@ -23,7 +23,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
      FormsModule,
      MatButton,
      MatDividerModule,
-     MatChipsModule
+     MatIconModule,
+     MatProgressBarModule
   ],
   templateUrl: './movie-list.page.html',
   styleUrl: './movie-list.page.scss',
